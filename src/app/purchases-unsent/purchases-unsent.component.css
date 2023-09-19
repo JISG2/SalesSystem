@@ -1,0 +1,31 @@
+.status {
+    width: 150px;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    height: 24px;
+    font-weight: 600;
+    color: white;
+}
+
+.Cancelled {
+    background-color: tomato;
+    
+}
+
+.Created {
+    background-color: green;
+}
+
+.Received {
+    background-color: blue;
+}
+
+.Accepted{
+    background-color: darkturquoise;
+}
+
+.Sent{
+    background-color: greenyellow;
+}

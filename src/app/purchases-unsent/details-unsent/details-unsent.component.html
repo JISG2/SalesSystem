@@ -1,0 +1,168 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h2 class="card-title">Orden de compra</h2>
+                    </div>
+                    <div class="card-body">
+                        <h3>
+                            <mat-label>Datos del cliente</mat-label>
+                        </h3>
+                        <div class="row">
+                            <div class="col">                                
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Nombre completo" type="text" disabled [value]="customerFullName" class="text">
+                                </mat-form-field>
+                            </div>
+                            <div class="col">                                
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Número de teléfono" type="text" disabled [value]="purchaseOrderDetail.customer.phone" class="text">
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Correo" type="text" disabled [value]="purchaseOrderDetail.customer.email" class="text">
+                                </mat-form-field>
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Estado" type="text" disabled [value]="purchaseOrderDetail.customer.state" class="text">
+                                </mat-form-field>
+                            </div>
+                            <div class="col">                                
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Municipio" type="text" disabled [value]="purchaseOrderDetail.customer.municipality" class="text">
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Colonia" type="text" disabled [value]="purchaseOrderDetail.customer.colony" class="text">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Calle" type="text" disabled [value]="purchaseOrderDetail.customer.street" class="text">
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Número interior" type="number" disabled [value]="purchaseOrderDetail.customer.interiorNumber" class="text">
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Número exterior" type="number" disabled [value]="purchaseOrderDetail.customer.exteriorNumber" class="text">
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Código postal" type="number" disabled [value]="purchaseOrderDetail.customer.zipCode" class="text">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <h3>
+                            <mat-label>Productos</mat-label>
+                        </h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        SKU
+                                    </th>
+                                    <th>
+                                        Nombre
+                                    </th>                                    
+                                    <th>
+                                        Precio
+                                    </th>
+                                    <th>
+                                        Cantidad
+                                    </th>
+                                    <th>
+                                        Total
+                                    </th>
+                                    <th>
+                                        Acciones
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let product of purchaseOrderDetail.products">
+                                        <td>
+                                            {{product.product.sku}}
+                                        </td>
+                                        
+                                        <td>
+                                            {{product.product.name}}
+                                        </td>
+                                       
+                                        <td>
+                                            {{product.product.price | currency}}
+                                        </td>
+                                        <td>
+                                            {{product.quantity}}
+                                        </td>
+                                        <td>
+                                            {{product.total | currency}}
+                                        </td>
+                                        <td>
+                                            <button mat-raised-button type="submit" class="btn btn-info" (click)="deleteProduct(product)" disabled>Editar</button>
+                                            <button mat-raised-button type="submit" class="btn btn-danger" (click)="deleteProduct(product)" disabled>Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h3>
+                            <mat-label>Detalle Orden de compra</mat-label>
+                        </h3>
+                        <div class="row">
+                            <div class="col-6">                                
+                                <p>
+                                    <mat-label class="label">Fecha de pedido: </mat-label>
+                                    <mat-label class="label">{{purchaseOrderDetail.createAt |  date:'medium'}} </mat-label>
+                                </p>
+                            </div>
+                            <div class="col-2">
+                                <p>
+                                    <mat-label class="label">IVA: </mat-label>
+                                    <mat-label class="label">{{purchaseOrderDetail.iva}}%</mat-label>  
+                                </p>                                                       
+                            </div>
+                            <div class="col-4">
+                                <p>
+                                    <mat-label class="label">Monto total: </mat-label>
+                                    <mat-label class="label">{{purchaseOrderDetail.total | currency}} </mat-label>  
+                                </p>                                                       
+                            </div>
+                        </div>
+                        <form [formGroup]="formPurchaseOrder">
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select formControlName="status" matInput placeholder="Estatus">
+                                            <mat-option *ngFor="let status of statuses" [value]="status.value">
+                                                {{status.viewValue}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <button mat-raised-button type="submit" (click)="save()" class="btn btn-success" style="width: 100%;">Guardar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

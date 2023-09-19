@@ -1,0 +1,69 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Sucursales</h4>
+                    </div>
+                    <div class="card-body">
+                        <button type="button" routerLink="/branches-new" mat-raised-button class="btn btn-success">
+                            Agregar sucursal
+                            <span class="material-icons" style="font-size: 22px;">
+                                add
+                            </span>
+                        </button>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Acciones
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            Mina-Centro
+                                        </td>
+                                        <td>
+                                            <button mat-raised-button type="submit" class="btn btn-primary" (click)="details(product.id)">Detalles</button>
+                                            <button mat-raised-button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                    <tr *ngFor="let product of products">
+                                        <td>
+                                           <img class="img" [src]="product.coverImage"> 
+                                        </td>
+                                        <td>
+                                            {{product.name}}
+                                        </td>
+                                        <td>
+                                            {{product.sku}}
+                                        </td>
+                                        <td>
+                                            ${{product.price}}
+                                        </td>
+                                        <td>
+                                            <button mat-raised-button type="submit" class="btn btn-primary" (click)="details(product.id)">Detalles</button>
+                                            <button mat-raised-button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  
